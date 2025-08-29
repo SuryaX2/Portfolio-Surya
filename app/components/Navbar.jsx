@@ -42,7 +42,7 @@ const Navbar = ({ isDarkMode, setIsDarkMode }) => {
       >
         <a href="#top">
           <h2 className="cursor-pointer text-4xl font-light inline-block overflow-y-hidden">
-            Rounak
+            Surya
           </h2>
           <span className="inline-block w-2 h-2 bg-red-500 rounded-full ml-1"></span>
         </a>
