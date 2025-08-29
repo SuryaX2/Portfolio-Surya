@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+@theme {
+  --font-ovo: Ovo;
+  --lightHover: #fcf4ff;
+  --darkHover: #2a004a;
+  --darkTheme: #11001f;
+  --boxShadow-light-mode: 4px 4px 0 #000;
+  --boxShadow-dark-mode: 4px 4px 0 #fff;
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+
+.font-outfit {
+  font-family: var(--font-outfit), sans-serif;
+}
+
+.custom-grid {
+  display: grid;
+  grid-template-columns: var(--grid-columns-auto);
+  gap: 1.5rem; /* Equivalent to Tailwind's gap-6 */
+  margin-top: 2.5rem; /* Equivalent to Tailwind's my-10 */
+  margin-bottom: 2.5rem;
+}
+
+@media (max-width: 768px) {
+  div {
+    overflow: hidden;
+  }
+}
