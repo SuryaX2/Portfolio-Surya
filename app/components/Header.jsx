@@ -182,7 +182,7 @@ const Header = ({ isDarkMode }) => {
 
         {/* Enhanced action buttons */}
         <motion.div
-          className="flex flex-col sm:flex-row items-center gap-6 mt-4"
+          className="flex flex-col sm:flex-row items-center gap-6 mt-4 p-2"
           variants={fadeInUp(0.8)}
         >
           <motion.a
