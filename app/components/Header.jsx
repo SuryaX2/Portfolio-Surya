@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import { assets } from "@/assets/assets";
-import { motion } from "framer-motion"; // Fix import to use 'framer-motion'
+import { motion } from "framer-motion";
 
 const fadeIn = (direction, delay = 0) => ({
   hidden: {
@@ -32,21 +32,21 @@ const Header = ({ isDarkMode }) => {
       className="w-11/12 max-w-3xl text-center mx-auto h-screen flex flex-col items-center justify-center gap-4"
       initial="hidden"
       whileInView="visible"
-      viewport={{ amount: 0.2 }} // Matches About section for re-triggering
+      viewport={{ amount: 0.2 }}
     >
-      <motion.div variants={scaleIn(0.2)}>
+      {/* <motion.div variants={scaleIn(0.2)}>
         <Image
           src={isDarkMode ? assets.profile_img_dark : assets.profile_img}
           alt=""
           className="rounded-full w-32"
         />
-      </motion.div>
+      </motion.div> */}
 
       <motion.h3
         className="flex items-end gap-2 text-xl md:text-2xl mb-3 font-ovo"
         variants={fadeIn("up", 0.3)}
       >
-        Hello! I'm Rounak Polley
+        Hello! I'm Surya Sekhar Sharma
         <Image src={assets.hand_icon} alt="" className="w-6" />
       </motion.h3>
 
