@@ -171,6 +171,12 @@ export const infoList = [
     description: "C, Java, SQL",
   },
   {
+    icon: assets.project_icon,
+    iconDark: assets.project_icon_dark,
+    title: "Projects",
+    description: "Built Full Stack projects in MERN Stack",
+  },
+  {
     icon: assets.edu_icon,
     iconDark: assets.edu_icon_dark,
     title: "Web Technologies",
@@ -179,8 +185,8 @@ export const infoList = [
   {
     icon: assets.project_icon,
     iconDark: assets.project_icon_dark,
-    title: "Projects",
-    description: "Built Full Stack projects in MERN Stack",
+    title: "Tools & Platforms",
+    description: "Git, GitHub, MySQL, VS Code",
   },
 ];
 
