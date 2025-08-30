@@ -38,7 +38,7 @@ const About = ({ isDarkMode }) => {
 
       {/* Main Content */}
       <motion.div
-        className="flex w-full flex-col lg:flex-row items-center gap-20 my-20"
+        className="flex w-full flex-col items-center gap-20 my-20"
         variants={staggerContainer}
       >
         <motion.div
@@ -97,7 +97,7 @@ const About = ({ isDarkMode }) => {
             className="my-6 text-gray-700 font-ovo dark:text-white/80"
             variants={fadeInUp}
           >
-            Tools I use
+            Tech Stack
           </motion.h4>
           <motion.ul
             className="flex items-center gap-3 sm:gap-5 n"

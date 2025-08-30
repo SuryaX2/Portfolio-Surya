@@ -5,11 +5,11 @@ import edu_icon from "./edu-icon.png";
 import edu_icon_dark from "./edu-icon-dark.png";
 import project_icon from "./project-icon.png";
 import project_icon_dark from "./project-icon-dark.png";
-import vscode from "./vscode.png";
+import vscode from "./VSCode.svg";
 import firebase from "./firebase.png";
 import figma from "./figma.png";
-import git from "./git.png";
-import mongodb from "./mongodb.png";
+import git from "./Git.svg";
+import mongodb from "./MongoDB.svg";
 import right_arrow_white from "./right-arrow-white.png";
 import logo from "./logo.png";
 import logo_dark from "./logo_dark.png";
@@ -43,6 +43,17 @@ import footer from "./footer-bg-color.png";
 import profile_img_dark from "./profile-img-dark.png";
 import voyago from "./voyago.png";
 import postman from "./postman.png";
+import javascript from "./JS.svg"
+import HTML from "./HTML.svg"
+import CSS from "./CSS.svg"
+import Express from "./Express.svg"
+import SQL from "./SQL.svg"
+import Postman from "./Postman.svg"
+import C from "./C.svg"
+import Java from "./Java.svg"
+import React from "./React.svg"
+import NodeJS from "./NodeJS.svg"
+import TailwindCSS from "./TailwindCSS.svg"
 
 export const assets = {
   user_image,
@@ -90,6 +101,17 @@ export const assets = {
   profile_img_dark,
   voyago,
   postman,
+  javascript,
+  HTML,
+  CSS,
+  Express,
+  SQL,
+  Postman,
+  C,
+  Java,
+  React,
+  NodeJS,
+  TailwindCSS
 };
 
 export const workData = [
@@ -163,8 +185,18 @@ export const infoList = [
 ];
 
 export const toolsData = [
-  assets.vscode,
+  assets.C,
+  assets.Java,
+  assets.HTML,
+  assets.CSS,
+  assets.javascript,
   assets.mongodb,
+  assets.Express,
+  assets.React,
+  assets.NodeJS,
+  assets.TailwindCSS,
+  assets.SQL,
+  assets.vscode,
   assets.git,
-  assets.postman,
+  assets.Postman,
 ];
