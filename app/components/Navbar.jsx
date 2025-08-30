@@ -64,7 +64,7 @@ const Navbar = ({ isDarkMode, setIsDarkMode }) => {
             <a href="#education">Education</a>
           </li>
           <li>
-            <a href="#work">My Work</a>
+            <a href="#work">Projects</a>
           </li>
           <li>
             <a href="#contact">Contact me</a>
@@ -123,7 +123,7 @@ const Navbar = ({ isDarkMode, setIsDarkMode }) => {
             <a href="#education">Education</a>
           </li>
           <li>
-            <a href="#work">My Work</a>
+            <a href="#work">Projects</a>
           </li>
           <li>
             <a href="#contact">Contact me</a>
