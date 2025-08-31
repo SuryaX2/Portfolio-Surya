@@ -54,6 +54,7 @@ import Java from "./Java.svg"
 import React from "./React.svg"
 import NodeJS from "./NodeJS.svg"
 import TailwindCSS from "./TailwindCSS.svg"
+import BMGSHS from "./BMGSHS.jpg"
 
 export const assets = {
   user_image,
@@ -111,7 +112,8 @@ export const assets = {
   Java,
   React,
   NodeJS,
-  TailwindCSS
+  TailwindCSS,
+  BMGSHS
 };
 
 export const workData = [
@@ -137,23 +139,17 @@ export const workData = [
 
 export const educationData = [
   {
-    icon: assets.primary,
-    title: "Primary Education",
-    description: "Paramananda Siksha Sadan",
-    link: "https://schools.org.in/north-twenty-four-pargana/19113203007/pvt-parama-nanda-siksha-sadan.html",
-  },
-  {
-    icon: assets.hs,
+    icon: assets.BMGSHS,
     title: "Secondary Education",
-    description: "Bhatpara AmarKrishna Pathsala",
-    link: "https://school.banglarshiksha.gov.in/ws/website/index/19113200205",
+    description: "Bagmari Manicktala Govt. Sponsored High School",
+    link: "https://school.banglarshiksha.gov.in/ws/website/index/19170103511",
   },
 
   {
-    icon: assets.hs,
+    icon: assets.BMGSHS,
     title: "Higher Secondary",
-    description: "Bhatpara AmarKrishna Pathsala",
-    link: "https://school.banglarshiksha.gov.in/ws/website/index/19113200205",
+    description: "Bagmari Manicktala Govt. Sponsored High School",
+    link: "https://school.banglarshiksha.gov.in/ws/website/index/19170103511",
   },
   {
     icon: assets.college,
