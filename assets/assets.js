@@ -113,27 +113,21 @@ export const assets = {
   React,
   NodeJS,
   TailwindCSS,
-  BMGSHS
+  BMGSHS,
 };
 
 export const workData = [
   {
-    title: "Frontend App",
-    description: "Quiz App",
-    bgImage: "/work-1.png",
-    link: "https://quiz-app-nine-khaki.vercel.app/",
-  },
-  {
-    title: "Full Stack Web App",
-    description: "Travel Management system",
-    bgImage: "/work-2.png",
-    link: "https://voyago-u9ug.onrender.com/",
-  },
-  {
-    title: "jobOrbit - Job Portal App",
+    title: "Library Management System",
     description: "Full Stack Web App",
-    bgImage: "/work-3.png",
-    link: "https://job-orbit-beta.vercel.app/",
+    bgImage: "/LMS.jpg",
+    link: "https://lms-7phy.vercel.app/",
+  },
+  {
+    title: "InventoryPro - Inventory Management System",
+    description: "Full Stack Web App",
+    bgImage: "/IMS.webp",
+    link: "https://inventorypro-ims.vercel.app/",
   },
 ];
 
