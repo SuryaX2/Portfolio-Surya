@@ -118,15 +118,21 @@ export const assets = {
 
 export const workData = [
   {
+    title: "Surya Portfolio",
+    description: "Portfolio Website",
+    bgImage: "/Portfolio.jpg",
+    link: "https://lms-7phy.vercel.app/",
+  },
+  {
     title: "Library Management System",
     description: "Full Stack Web App",
     bgImage: "/LMS.jpg",
     link: "https://lms-7phy.vercel.app/",
   },
   {
-    title: "InventoryPro - Inventory Management System",
-    description: "Full Stack Web App",
-    bgImage: "/IMS.webp",
+    title: "InventoryPro",
+    description: "Inventory Management System",
+    bgImage: "/IMS.jpg",
     link: "https://inventorypro-ims.vercel.app/",
   },
 ];
