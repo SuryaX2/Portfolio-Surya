@@ -76,10 +76,10 @@ const Navbar = ({ isDarkMode, setIsDarkMode }) => {
 
         {/* Desktop Menu */}
         <motion.ul
-          className={`font-ovo hidden md:flex items-center gap-6 lg:gap-8 rounded-full px-12 py-3 ${
+          className={`font-ovo hidden md:flex items-center gap-6 lg:gap-8 rounded-2xl px-12 py-3 ${
             isScroll
               ? ""
-              : "bg-white/80 hidden shadow-sm opacity-90 dark:border dark:border-white/50 dark:bg-transparent"
+              : "bg-white/80 hidden shadow-sm opacity-90 dark:border dark:border-white/50 dark:bg-gray-700/20 backdrop-blur-2xl dark:shadow-white/10"
           }`}
           initial={{ y: -50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
