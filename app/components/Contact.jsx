@@ -5,6 +5,20 @@ import { motion } from "framer-motion";
 
 const Contact = () => {
   const [result, setResult] = useState("");
+  // Add state to track form values
+  const [formValues, setFormValues] = useState({
+    Name: "",
+    Email: "",
+    Message: ""
+  });
+
+  // Handle input changes
+  const handleInputChange = (field, value) => {
+    setFormValues(prev => ({
+      ...prev,
+      [field]: value
+    }));
+  };
 
   const onSubmit = async (event) => {
     event.preventDefault();
@@ -24,6 +38,8 @@ const Contact = () => {
       setTimeout(() => {
         setResult("");
         event.target.reset();
+        // Reset form state
+        setFormValues({ Name: "", Email: "", Message: "" });
       }, 5000);
     } else {
       console.log("Error", data);
@@ -244,7 +260,7 @@ const Contact = () => {
         {/* Right Side - Contact Form */}
         <motion.div className="space-y-8" variants={fadeInRight}>
           <form onSubmit={onSubmit} className="space-y-6">
-            {/* Form Fields Grid - Consistent styling */}
+            {/* Form Fields Grid - Fixed floating labels */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {["Name", "Email"].map((field, index) => (
                 <motion.div
@@ -257,18 +273,26 @@ const Contact = () => {
                   <input
                     type={field === "Email" ? "email" : "text"}
                     name={field}
+                    value={formValues[field]}
+                    onChange={(e) => handleInputChange(field, e.target.value)}
                     required
-                    className="peer p-4 w-full outline-none border-2 border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 transition-all duration-300 focus:border-blue-500 dark:focus:border-blue-400 focus:shadow-lg focus:shadow-blue-500/20"
+                    className="p-4 w-full outline-none border-2 border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 transition-all duration-300 focus:border-blue-500 dark:focus:border-blue-400 focus:shadow-lg focus:shadow-blue-500/20"
                     placeholder=" "
                   />
-                  <label className="absolute left-4 top-4 text-gray-500 dark:text-gray-400 transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:top-1 peer-focus:text-sm peer-focus:text-blue-600 dark:peer-focus:text-blue-400 peer-focus:font-semibold bg-white dark:bg-gray-800 px-2 rounded">
+                  <label 
+                    className={`absolute left-4 transition-all duration-300 bg-white dark:bg-gray-800 px-2 rounded pointer-events-none ${
+                      formValues[field] || document.activeElement?.name === field
+                        ? 'top-1 text-sm text-blue-600 dark:text-blue-400 font-semibold'
+                        : 'top-4 text-base text-gray-500 dark:text-gray-400'
+                    }`}
+                  >
                     {field}
                   </label>
                 </motion.div>
               ))}
             </div>
 
-            {/* Message Field */}
+            {/* Message Field - Fixed floating label */}
             <motion.div
               className="relative"
               initial={{ opacity: 0 }}
@@ -278,11 +302,19 @@ const Contact = () => {
               <textarea
                 rows="16"
                 name="Message"
+                value={formValues.Message}
+                onChange={(e) => handleInputChange("Message", e.target.value)}
                 required
                 className="peer w-full p-4 outline-none border-2 border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 transition-all duration-300 focus:border-blue-500 dark:focus:border-blue-400 focus:shadow-lg focus:shadow-blue-500/20 resize-none"
                 placeholder=" "
               />
-              <label className="absolute left-4 top-4 text-gray-500 dark:text-gray-400 transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:top-1 peer-focus:text-sm peer-focus:text-blue-600 dark:peer-focus:text-blue-400 peer-focus:font-semibold bg-white dark:bg-gray-800 px-2 rounded">
+              <label 
+                className={`absolute left-4 transition-all duration-300 bg-white dark:bg-gray-800 px-2 rounded pointer-events-none ${
+                  formValues.Message || document.activeElement?.name === "Message"
+                    ? 'top-1 text-sm text-blue-600 dark:text-blue-400 font-semibold'
+                    : 'top-4 text-base text-gray-500 dark:text-gray-400'
+                }`}
+              >
                 Enter your message
               </label>
             </motion.div>
