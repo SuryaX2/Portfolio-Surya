@@ -9,14 +9,14 @@ const Contact = () => {
   const [formValues, setFormValues] = useState({
     Name: "",
     Email: "",
-    Message: ""
+    Message: "",
   });
 
   // Handle input changes
   const handleInputChange = (field, value) => {
-    setFormValues(prev => ({
+    setFormValues((prev) => ({
       ...prev,
-      [field]: value
+      [field]: value,
     }));
   };
 
@@ -279,11 +279,11 @@ const Contact = () => {
                     className="p-4 w-full outline-none border-2 border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 transition-all duration-300 focus:border-blue-500 dark:focus:border-blue-400 focus:shadow-lg focus:shadow-blue-500/20"
                     placeholder=" "
                   />
-                  <label 
+                  <label
                     className={`absolute left-4 transition-all duration-300 bg-white dark:bg-gray-800 px-2 rounded pointer-events-none ${
-                      formValues[field] || document.activeElement.name === field
-                        ? 'top-1 text-sm text-blue-600 dark:text-blue-400 font-semibold'
-                        : 'top-4 text-base text-gray-500 dark:text-gray-400'
+                      formValues[field]
+                        ? "top-1 text-sm text-blue-600 dark:text-blue-400 font-semibold"
+                        : "top-4 text-base text-gray-500 dark:text-gray-400"
                     }`}
                   >
                     {field}
@@ -308,11 +308,11 @@ const Contact = () => {
                 className="peer w-full p-4 outline-none border-2 border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 transition-all duration-300 focus:border-blue-500 dark:focus:border-blue-400 focus:shadow-lg focus:shadow-blue-500/20 resize-none"
                 placeholder=" "
               />
-              <label 
+              <label
                 className={`absolute left-4 transition-all duration-300 bg-white dark:bg-gray-800 px-2 rounded pointer-events-none ${
-                  formValues.Message || document.activeElement?.name === "Message"
-                    ? 'top-1 text-sm text-blue-600 dark:text-blue-400 font-semibold'
-                    : 'top-4 text-base text-gray-500 dark:text-gray-400'
+                  formValues.Message
+                    ? "top-1 text-sm text-blue-600 dark:text-blue-400 font-semibold"
+                    : "top-4 text-base text-gray-500 dark:text-gray-400"
                 }`}
               >
                 Enter your message
@@ -335,7 +335,7 @@ const Contact = () => {
             </motion.button>
 
             {/* Result Message */}
-            {result && (  
+            {result && (
               <motion.p
                 className="text-center mt-4 font-ovo"
                 initial={{ opacity: 0, scale: 0.8 }}
