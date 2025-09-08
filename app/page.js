@@ -9,27 +9,35 @@ import Navbar from "./components/Navbar";
 import Work from "./components/Work";
 
 export default function Home() {
-  const [isDarkMode, setDarkMode] = useState(false);
+  // Initialize with true for default dark mode
+  const [isDarkMode, setDarkMode] = useState(true);
 
   useEffect(() => {
-    if (
-      localStorage.theme === "dark" ||
-      (!("theme" in localStorage) &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches)
-    ) {
+    // Check localStorage first, if no preference exists, default to dark mode
+    const savedTheme = localStorage.getItem("theme");
+
+    if (savedTheme === "dark" || savedTheme === "") {
       setDarkMode(true);
-    } else {
+    } else if (savedTheme === "light") {
       setDarkMode(false);
+    } else {
+      // No theme in localStorage, check system preference but prefer dark
+      if (window.matchMedia("(prefers-color-scheme: light)").matches) {
+        setDarkMode(false);
+      } else {
+        // Default to dark mode
+        setDarkMode(true);
+      }
     }
   }, []);
 
   useEffect(() => {
     if (isDarkMode) {
       document.documentElement.classList.add("dark");
-      localStorage.theme = "dark";
+      localStorage.setItem("theme", "dark");
     } else {
       document.documentElement.classList.remove("dark");
-      localStorage.theme = "";
+      localStorage.setItem("theme", "light");
     }
   }, [isDarkMode]);
 

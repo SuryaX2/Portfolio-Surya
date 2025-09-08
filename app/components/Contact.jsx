@@ -281,7 +281,7 @@ const Contact = () => {
                   />
                   <label 
                     className={`absolute left-4 transition-all duration-300 bg-white dark:bg-gray-800 px-2 rounded pointer-events-none ${
-                      formValues[field] || document.activeElement?.name === field
+                      formValues[field] || document.activeElement.name === field
                         ? 'top-1 text-sm text-blue-600 dark:text-blue-400 font-semibold'
                         : 'top-4 text-base text-gray-500 dark:text-gray-400'
                     }`}

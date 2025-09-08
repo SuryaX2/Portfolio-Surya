@@ -163,15 +163,15 @@ const Work = () => {
         </motion.p>
       </div>
 
-      {/* Original Project Cards with Enhanced Animations */}
+      {/* Fixed Project Cards Grid - Consistent sizing regardless of project count */}
       <motion.div
-        className="grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] my-10 gap-6 dark:text-black"
+        className="flex flex-wrap justify-center my-10 gap-6 dark:text-black max-w-6xl mx-auto"
         variants={staggerContainer}
       >
         {workData.map((project, index) => (
           <motion.div
             key={index}
-            className="aspect-square bg-no-repeat bg-cover bg-center rounded-lg relative cursor-pointer group"
+            className="w-full lg:w-96 h-80 bg-no-repeat bg-cover bg-center rounded-lg relative cursor-pointer group flex-shrink-0"
             style={{ backgroundImage: `url(${project.bgImage})` }}
             variants={fadeInUp}
             whileHover={{ scale: 1.05, rotate: 2 }}

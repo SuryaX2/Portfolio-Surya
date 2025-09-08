@@ -118,12 +118,6 @@ export const assets = {
 
 export const workData = [
   {
-    title: "Surya Portfolio",
-    description: "Portfolio Website",
-    bgImage: "/Portfolio.jpg",
-    link: "https://lms-7phy.vercel.app/",
-  },
-  {
     title: "Library Management System",
     description: "Full Stack Web App",
     bgImage: "/LMS.jpg",

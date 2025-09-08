@@ -11,6 +11,28 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* Default to dark theme to prevent flash */
+:root {
+  color-scheme: dark;
+  background-color: #11001f;
+}
+
+html {
+  background-color: #11001f;
+}
+
+/* Light theme overrides */
+html:not(.dark) {
+  background-color: #ffffff;
+}
+
+html:not(.dark):root {
+  color-scheme: light;
+}
+
+body {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
 
 .font-outfit {
   font-family: var(--font-outfit), sans-serif;

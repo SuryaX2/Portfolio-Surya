@@ -22,9 +22,35 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={`${outfit.variable} ${ovo.variable} scroll-smooth`}
+      className={`${outfit.variable} ${ovo.variable} scroll-smooth dark`}
     >
-      <body className="font-outfit antialiased leading-8 dark:bg-[var(--darkTheme)] dark:text-white ">
+      <head>
+        {/* Prevent flash of light theme by setting dark mode immediately */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var theme = localStorage.getItem('theme');
+                  if (theme === 'light') {
+                    document.documentElement.classList.remove('dark');
+                  } else {
+                    // Default to dark mode
+                    document.documentElement.classList.add('dark');
+                    if (!theme) {
+                      localStorage.setItem('theme', 'dark');
+                    }
+                  }
+                } catch (e) {
+                  // If localStorage is not available, default to dark
+                  document.documentElement.classList.add('dark');
+                }
+              })();
+            `,
+          }}
+        />
+      </head>
+      <body className="font-outfit antialiased leading-8 dark:bg-[var(--darkTheme)] dark:text-white">
         {children}
       </body>
     </html>
