@@ -337,7 +337,7 @@ const Navbar = ({ isDarkMode, setIsDarkMode }) => {
           <motion.div
             className={`hidden md:flex items-center gap-1 lg:gap-2 rounded-2xl px-6 lg:px-8 py-3 ${
               isScrolled
-                ? "bg-gray-50/50 dark:bg-white/5"
+                ? ""
                 : "bg-white/70 dark:bg-gray-800/30 backdrop-blur-xl border border-white/20 dark:border-white/10 shadow-lg dark:shadow-2xl"
             } transition-all duration-500`}
             variants={navbarVariants}
@@ -424,40 +424,6 @@ const Navbar = ({ isDarkMode, setIsDarkMode }) => {
                 transition={{ duration: 0.3 }}
               />
             </motion.button>
-
-            {/* Contact Button - Desktop Only */}
-            <motion.a
-              href="#contact"
-              variants={buttonVariants}
-              whileHover="hover"
-              whileTap="tap"
-              className="hidden lg:flex items-center gap-3 px-6 py-2.5 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white rounded-full font-medium transition-all duration-300 group relative overflow-hidden shadow-lg hover:shadow-xl"
-            >
-              {/* Background animation */}
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 opacity-0 group-hover:opacity-100"
-                initial={{ scale: 0, rotate: 180 }}
-                whileHover={{ scale: 1, rotate: 0 }}
-                transition={{ duration: 0.4, ease: "easeOut" }}
-              />
-
-              <span className="relative z-10">Contact</span>
-              <motion.div
-                className="relative z-10"
-                animate={{ x: [0, 3, 0] }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              >
-                <Image
-                  src={assets.arrow_icon_dark}
-                  alt="arrow"
-                  className="w-3 h-3 brightness-0 invert"
-                />
-              </motion.div>
-            </motion.a>
 
             {/* Mobile Menu Toggle */}
             <motion.button
