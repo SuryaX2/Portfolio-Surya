@@ -1,309 +1,343 @@
 import { assets, infoList, toolsData } from "@/assets/assets";
-import React from "react";
+import React, { useRef } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
-
-const fadeInUp = {
-  hidden: { opacity: 0, y: 50 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
-};
-
-const fadeInLeft = {
-  hidden: { opacity: 0, x: -60 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" } },
-};
-
-const fadeInRight = {
-  hidden: { opacity: 0, x: 60 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" } },
-};
-
-const staggerContainer = {
-  hidden: { opacity: 1 },
-  visible: {
-    transition: { staggerChildren: 0.15 },
-  },
-};
-
-const floatingAnimation = {
-  animate: {
-    y: [-10, 10, -10],
-    rotate: [-2, 2, -2],
-    transition: {
-      duration: 6,
-      repeat: Infinity,
-      ease: "easeInOut",
-    },
-  },
-};
+import { motion, useScroll, useTransform, useInView } from "framer-motion";
 
 const About = ({ isDarkMode }) => {
+  const sectionRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"]
+  });
+
+  // Parallax transforms
+  const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
+  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
+
   return (
-    <motion.div
-      id="about"
-      className="px-[12%] py-20 scroll-mt-20 relative overflow-hidden"
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: false, amount: 0.2 }}
-      variants={staggerContainer}
+    <section 
+      ref={sectionRef}
+      id="about" 
+      className="relative min-h-screen bg-black text-white overflow-hidden"
     >
-      {/* Animated Background Elements */}
-      <motion.div
-        className="absolute top-10 left-10 w-32 h-32 bg-gradient-to-r from-blue-400/10 to-purple-400/10 rounded-full blur-3xl"
-        animate={{
-          scale: [1, 1.2, 1],
-          opacity: [0.3, 0.6, 0.3],
-        }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      />
-      <motion.div
-        className="absolute top-32 right-16 w-24 h-24 bg-gradient-to-r from-pink-400/10 to-yellow-400/10 rounded-full blur-2xl"
-        animate={{
-          x: [0, 30, 0],
-          y: [0, -20, 0],
-        }}
-        transition={{
-          duration: 10,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 2,
-        }}
-      />
-
-      {/* Header */}
-      <div className="text-center mb-16">
-        <motion.h4
-          className="text-lg font-ovo text-blue-600 dark:text-blue-400 mb-2"
-          variants={fadeInUp}
-        >
-          Get To Know Me
-        </motion.h4>
-        <motion.h2
-          className="text-5xl lg:text-6xl font-ovo font-bold bg-gradient-to-r from-gray-800 to-gray-600 dark:from-white dark:to-gray-300 bg-clip-text text-transparent"
-          variants={fadeInUp}
-        >
-          About Me
-        </motion.h2>
-        <motion.div
-          className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto mt-4 rounded-full"
-          variants={fadeInUp}
-          initial={{ width: 0 }}
-          whileInView={{ width: 96 }}
-          transition={{ duration: 0.8, delay: 0.5 }}
-        />
-      </div>
-
-      {/* Main Content - New Layout */}
-      <div className="grid lg:grid-cols-2 gap-16 items-center mb-20">
-        {/* Left Side - Image with Enhanced Background */}
-        <motion.div
-          className="relative flex justify-center lg:justify-start"
-          variants={fadeInLeft}
-        >
-          {/* Decorative Background Elements */}
+      {/* Animated Grid Background */}
+      <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,_rgba(120,119,198,0.3),_transparent_50%),radial-gradient(circle_at_80%_20%,_rgba(255,119,198,0.3),_transparent_50%),radial-gradient(circle_at_40%_40%,_rgba(120,219,255,0.3),_transparent_50%)] opacity-40" />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:50px_50px] animate-pulse" />
+        
+        {/* Floating Particles */}
+        {[...Array(20)].map((_, i) => (
           <motion.div
-            className="absolute inset-0 bg-gradient-to-br from-blue-100 to-purple-100 dark:from-blue-900/20 dark:to-purple-900/20 rounded-3xl blur-2xl transform rotate-6"
-            {...floatingAnimation}
-          />
-          <motion.div
-            className="absolute inset-0 bg-gradient-to-tl from-pink-100 to-yellow-100 dark:from-pink-900/20 dark:to-yellow-900/20 rounded-3xl blur-xl transform -rotate-3"
+            key={i}
+            className="absolute w-1 h-1 bg-cyan-400 rounded-full"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+            }}
             animate={{
-              rotate: [-3, 3, -3],
-              scale: [0.95, 1.05, 0.95],
+              y: [-20, 20, -20],
+              opacity: [0.2, 1, 0.2],
+              scale: [1, 1.5, 1],
             }}
             transition={{
-              duration: 8,
+              duration: 4 + Math.random() * 4,
               repeat: Infinity,
               ease: "easeInOut",
-              delay: 1,
+              delay: Math.random() * 2,
             }}
           />
+        ))}
+      </div>
 
-          {/* Main Image */}
+      <div className="relative z-10 max-w-7xl mx-auto px-6 py-32">
+        
+        {/* Hero Section */}
+        <motion.div 
+          className="text-center mb-32"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, ease: "easeOut" }}
+          viewport={{ once: true }}
+        >
           <motion.div
-            className="relative w-80 h-96 rounded-3xl overflow-hidden shadow-2xl border-4 border-white dark:border-gray-700"
-            whileHover={{ scale: 1.05, rotate: 2 }}
-            transition={{ duration: 0.3 }}
+            className="inline-block mb-6"
+            initial={{ scale: 0 }}
+            whileInView={{ scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <Image
-              src={assets.aboutme}
-              alt="About Me"
-              className="w-full h-full object-contain"
+            <span className="px-6 py-3 bg-gradient-to-r from-purple-500/20 to-cyan-500/20 border border-purple-500/30 rounded-full text-purple-300 font-medium text-lg backdrop-blur-sm">
+              ABOUT ME
+            </span>
+          </motion.div>
+          
+          <motion.h1 
+            className="text-6xl md:text-8xl lg:text-9xl font-black mb-8 leading-none"
+            initial={{ opacity: 0, y: 100 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.2, delay: 0.4 }}
+          >
+            <span className="block bg-gradient-to-r from-white via-purple-200 to-cyan-200 bg-clip-text text-transparent">
+              CREATIVE
+            </span>
+            <span className="block bg-gradient-to-r from-purple-400 via-cyan-400 to-white bg-clip-text text-transparent">
+              DEVELOPER
+            </span>
+          </motion.h1>
+        </motion.div>
+
+        {/* Main Content */}
+        <div className="grid lg:grid-cols-2 gap-20 items-center mb-32">
+          
+          {/* Left - Content */}
+          <motion.div 
+            className="space-y-12"
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            {/* Story */}
+            <div className="space-y-8">
+              <h2 className="text-4xl font-bold text-white mb-6">
+                Building Digital
+                <span className="block text-transparent bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text">
+                  Experiences
+                </span>
+              </h2>
+              
+              <div className="space-y-6 text-lg text-gray-300 leading-relaxed">
+                <p>
+                  I'm a passionate <span className="text-purple-400 font-semibold">Full Stack Developer</span> who transforms ideas into captivating digital realities. Currently pursuing my studies while building cutting-edge web applications that push the boundaries of user experience.
+                </p>
+                <p>
+                  My journey revolves around creating <span className="text-cyan-400 font-semibold">innovative solutions</span> that not only look stunning but deliver exceptional performance and accessibility across all platforms.
+                </p>
+              </div>
+            </div>
+
+            {/* Stats */}
+            <motion.div 
+              className="grid grid-cols-3 gap-8"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+            >
+              {[
+                { number: "20+", label: "Projects" },
+                { number: "15+", label: "Technologies" },
+                { number: "100%", label: "Dedication" }
+              ].map((stat, index) => (
+                <div key={index} className="text-center">
+                  <motion.div 
+                    className="text-3xl font-bold text-white mb-2"
+                    initial={{ scale: 0 }}
+                    whileInView={{ scale: 1 }}
+                    transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
+                  >
+                    {stat.number}
+                  </motion.div>
+                  <div className="text-gray-400 text-sm uppercase tracking-wider">
+                    {stat.label}
+                  </div>
+                </div>
+              ))}
+            </motion.div>
+          </motion.div>
+
+          {/* Right - Image & Visual */}
+          <motion.div 
+            className="relative flex justify-center"
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1, delay: 0.4 }}
+            viewport={{ once: true }}
+          >
+            {/* Glowing Background */}
+            <motion.div 
+              className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-cyan-500/20 rounded-full blur-3xl"
+              animate={{
+                scale: [1, 1.2, 1],
+                rotate: [0, 180, 360],
+              }}
+              transition={{
+                duration: 10,
+                repeat: Infinity,
+                ease: "linear",
+              }}
             />
-
-            {/* Overlay gradient */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
-
-            {/* Floating dots decoration */}
-            {[...Array(6)].map((_, i) => (
+            
+            {/* Main Image */}
+            <motion.div 
+              className="relative w-80 h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden border-4 border-white/10 shadow-2xl"
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            >
+              <Image
+                src={assets.aboutme}
+                alt="Surya Sekhar Sharma"
+                className="w-full h-full object-cover"
+                priority
+              />
+              
+              {/* Overlay Effects */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-cyan-500/10" />
+            </motion.div>
+            
+            {/* Orbiting Elements */}
+            {[...Array(3)].map((_, i) => (
               <motion.div
                 key={i}
-                className="absolute w-2 h-2 bg-white/60 rounded-full"
+                className="absolute w-4 h-4 bg-gradient-to-r from-purple-400 to-cyan-400 rounded-full"
                 style={{
-                  top: `${20 + i * 12}%`,
-                  right: `${10 + (i % 2) * 5}%`,
+                  top: "50%",
+                  left: "50%",
                 }}
                 animate={{
-                  opacity: [0.3, 1, 0.3],
-                  scale: [0.8, 1.2, 0.8],
+                  rotate: [0, 360],
+                  x: [0, Math.cos(i * 120 * Math.PI / 180) * 200, 0],
+                  y: [0, Math.sin(i * 120 * Math.PI / 180) * 200, 0],
                 }}
                 transition={{
-                  duration: 2 + i * 0.3,
+                  duration: 8 + i * 2,
                   repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: i * 0.4,
+                  ease: "linear",
                 }}
               />
             ))}
           </motion.div>
-        </motion.div>
+        </div>
 
-        {/* Right Side - Content */}
-        <motion.div className="space-y-8" variants={fadeInRight}>
-          {/* About Description */}
-          <div className="space-y-6">
-            <motion.p
-              className="text-lg leading-relaxed font-ovo text-gray-700 dark:text-gray-300"
-              variants={fadeInUp}
-            >
-              I am a passionate{" "}
-              <span className="text-blue-600 dark:text-blue-400 font-semibold">
-                Full Stack Web Developer
-              </span>{" "}
-              currently pursuing my studies in college. Throughout my learning
-              journey, I have gained hands-on experience in building dynamic and
-              responsive web applications.
-            </motion.p>
-
-            <motion.p
-              className="text-lg leading-relaxed font-ovo text-gray-600 dark:text-gray-400"
-              variants={fadeInUp}
-            >
-              I enjoy working with{" "}
-              <span className="text-purple-600 dark:text-purple-400 font-semibold">
-                modern technologies
-              </span>{" "}
-              and continuously expanding my skills to create impactful digital
-              solutions that make a difference in people's lives.
-            </motion.p>
-          </div>
-
-          {/* Info Cards - Redesigned */}
-          <motion.div
-            className="grid grid-cols-1 sm:grid-cols-2 gap-4"
-            variants={staggerContainer}
-          >
+        {/* Skills Cards */}
+        <motion.div 
+          className="mb-32"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 1 }}
+          viewport={{ once: true }}
+        >
+          <h3 className="text-4xl font-bold text-center mb-16">
+            <span className="text-transparent bg-gradient-to-r from-white to-gray-400 bg-clip-text">
+              What I Do
+            </span>
+          </h3>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {infoList.map(({ icon, iconDark, title, description }, index) => (
               <motion.div
                 key={index}
-                className="group p-6 rounded-2xl bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 shadow-lg hover:shadow-xl border border-gray-100 dark:border-gray-700 cursor-pointer transition-all duration-300"
-                variants={fadeInUp}
-                whileHover={{
-                  scale: 1.03,
-                  y: -5,
-                  boxShadow: "0 20px 40px rgba(0,0,0,0.1)",
+                className="group relative p-8 bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-sm border border-white/10 rounded-2xl hover:border-purple-500/30 transition-all duration-500"
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                whileHover={{ 
+                  y: -10,
+                  scale: 1.02,
+                  boxShadow: "0 20px 40px rgba(168, 85, 247, 0.15)"
                 }}
+                viewport={{ once: true }}
               >
-                <motion.div
-                  className="w-12 h-12 mb-4 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center"
-                  whileHover={{ rotate: 360 }}
+                {/* Glow Effect */}
+                <div className="absolute inset-0 bg-gradient-to-r from-purple-500/0 to-cyan-500/0 group-hover:from-purple-500/5 group-hover:to-cyan-500/5 rounded-2xl transition-all duration-500" />
+                
+                <motion.div 
+                  className="w-16 h-16 mb-6 bg-gradient-to-br from-purple-500 to-cyan-500 rounded-xl flex items-center justify-center"
+                  whileHover={{ rotate: 360, scale: 1.1 }}
                   transition={{ duration: 0.6 }}
                 >
                   <Image
                     src={isDarkMode ? iconDark : icon}
                     alt={title}
-                    className="w-6 h-6 filter brightness-0 invert"
+                    className="w-8 h-8 filter brightness-0 invert"
                   />
                 </motion.div>
-                <h3 className="font-semibold text-gray-800 dark:text-white mb-2 text-lg">
+                
+                <h4 className="text-xl font-semibold text-white mb-4 group-hover:text-purple-300 transition-colors">
                   {title}
-                </h3>
-                <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+                </h4>
+                <p className="text-gray-400 group-hover:text-gray-300 transition-colors">
                   {description}
                 </p>
               </motion.div>
             ))}
-          </motion.div>
+          </div>
+        </motion.div>
+
+        {/* Tech Stack - Redesigned */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 1 }}
+          viewport={{ once: true }}
+        >
+          <div className="text-center mb-20">
+            <h3 className="text-5xl font-bold mb-6">
+              <span className="text-transparent bg-gradient-to-r from-purple-400 via-white to-cyan-400 bg-clip-text">
+                TECH ARSENAL
+              </span>
+            </h3>
+            <p className="text-gray-400 text-xl max-w-2xl mx-auto">
+              Cutting-edge tools and technologies I wield to craft digital masterpieces
+            </p>
+          </div>
+
+          {/* 3D Carousel Effect */}
+          <div className="relative perspective-1000 h-80 overflow-hidden">
+            <motion.div 
+              className="absolute inset-0 flex items-center justify-center"
+              style={{ y }}
+            >
+              <div className="flex space-x-8 animate-spin-slow">
+                {toolsData.map((tool, index) => (
+                  <motion.div
+                    key={index}
+                    className="flex-shrink-0 w-24 h-24 bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm border border-white/20 rounded-2xl flex items-center justify-center group cursor-pointer"
+                    style={{
+                      transform: `rotateY(${index * (360 / toolsData.length)}deg) translateZ(200px)`,
+                    }}
+                    whileHover={{ 
+                      scale: 1.2,
+                      rotateY: 180,
+                      boxShadow: "0 10px 30px rgba(168, 85, 247, 0.3)"
+                    }}
+                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                  >
+                    <Image
+                      src={tool}
+                      alt="Technology"
+                      className="w-12 h-12 object-contain group-hover:scale-110 transition-transform duration-300"
+                    />
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+        </motion.div>
+
+        {/* CTA Section */}
+        <motion.div 
+          className="text-center pt-20"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          viewport={{ once: true }}
+        >
+          <motion.button
+            className="px-12 py-4 bg-gradient-to-r from-purple-600 to-cyan-600 text-white font-semibold rounded-full text-lg shadow-2xl hover:shadow-purple-500/25 transition-all duration-300"
+            whileHover={{ scale: 1.05, y: -5 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            Let's Create Something Amazing
+          </motion.button>
         </motion.div>
       </div>
 
-      {/* Tech Stack Section */}
-      <motion.div className="mt-20" variants={staggerContainer}>
-        <motion.div className="text-center mb-12" variants={fadeInUp}>
-          <h3 className="text-3xl lg:text-4xl font-ovo font-bold text-gray-800 dark:text-white mb-4">
-            Tech Stack
-          </h3>
-          <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            Technologies and tools I work with to bring ideas to life
-          </p>
-        </motion.div>
-
-        {/* Carousel Container */}
-        <motion.div className="relative overflow-hidden" variants={fadeInUp}>
-          {/* Gradient Overlays for smooth edges */}
-          <div className="absolute left-0 top-0 w-20 h-full bg-gradient-to-r from-white dark:from-[var(--darkTheme)] to-transparent z-10" />
-          <div className="absolute right-0 top-0 w-20 h-full bg-gradient-to-l from-white dark:from-[var(--darkTheme)] to-transparent z-10" />
-
-          {/* Infinite Scrolling Carousel */}
-          <motion.div
-            className="flex gap-8 py-8"
-            animate={{
-              x: [0, -50 * toolsData.length],
-            }}
-            transition={{
-              duration: 10,
-              repeat: Infinity,
-              ease: "linear",
-            }}
-            style={{ width: `${toolsData.length * 100}px` }}
-          >
-            {/* First set of tools */}
-            {toolsData.map((tool, index) => (
-              <motion.div
-                key={`first-${index}`}
-                className="flex-shrink-0 w-20 h-20 rounded-2xl bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl flex items-center justify-center cursor-pointer transition-all duration-150 border border-gray-100 dark:border-gray-700"
-                whileHover={{
-                  scale: 1.1,
-                  rotate: 5,
-                  boxShadow: "0 10px 30px rgba(0,0,0,0.15)",
-                }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Image
-                  src={tool}
-                  alt="Technology"
-                  className="w-20 h-20 object-contain rounded-2xl"
-                />
-              </motion.div>
-            ))}
-
-            {/* Duplicate set for seamless loop */}
-            {toolsData.map((tool, index) => (
-              <motion.div
-                key={`second-${index}`}
-                className="flex-shrink-0 w-20 h-20 rounded-2xl bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl flex items-center justify-center cursor-pointer transition-all duration-150 border border-gray-100 dark:border-gray-700"
-                whileHover={{
-                  scale: 1.1,
-                  rotate: 5,
-                  boxShadow: "0 10px 30px rgba(0,0,0,0.15)",
-                }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Image
-                  src={tool}
-                  alt="Technology"
-                  className="w-20 h-20 object-contain rounded-2xl"
-                />
-              </motion.div>
-            ))}
-          </motion.div>
-        </motion.div>
-      </motion.div>
-    </motion.div>
+      <style jsx>{`
+        .perspective-1000 {
+          perspective: 1000px;
+        }
+      `}</style>
+    </section>
   );
 };
 
